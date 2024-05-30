@@ -1,0 +1,8 @@
+docker start -i optimistic_wozniak
+apt-get -y install curl
+curl -sL https://deb.nodesource.com/setup_20.x | bash
+apt install -y nodejs
+8
+18
+node /usr/src/app/index.js
+exit
