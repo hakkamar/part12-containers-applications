@@ -10,9 +10,10 @@ describe("NewBlog", () => {
 
     render(<NewBlog doCreate={doCreate} />);
 
-    const title = screen.getByTestId("title");
-    const url = screen.getByTestId("url");
-    const author = screen.getByTestId("author");
+    //const title = screen.getByTestId("title");
+    const title = screen.getByText("Title:");
+    const url = screen.getByText("URL:");
+    const author = screen.getByText("Author:");
     const button = screen.getByText("Create");
 
     await user.type(title, "Testing the testing");

@@ -1,4 +1,5 @@
-import axios from "axios";
+//import axios from "axios";
+import axios from "../util/apiClient";
 
 //kommenttien tallennuspaikka /api/blogs/:id/comments
 const baseUrl = "/api/blogs";

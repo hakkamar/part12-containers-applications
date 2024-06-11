@@ -10,7 +10,7 @@ const Footer = () => {
     <div style={footerStyle}>
       <br />
       <hr></hr>
-      <em>Blogi appi ( FullStackOpen harjoitus osa7 ), Hakkis 3/2024</em>
+      <em>Blogi appi ( FullStackOpen harjoitus osa12 ), Hakkis 6/2024</em>
       <hr></hr>
     </div>
   );

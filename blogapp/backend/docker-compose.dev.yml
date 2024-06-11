@@ -1,0 +1,29 @@
+#version: '3.8'
+
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 3456:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: fullstack
+      MONGO_INITDB_ROOT_PASSWORD: aRgYNpGlHTgYSZpc
+      MONGO_INITDB_DATABASE: blogApp
+    volumes:
+      #- ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - ./mongo_data:/data/db
+  server:
+    image: blogapp-backend-dev
+    build:
+      context: . # The context will pick this directory as the "build context"
+      dockerfile: dev.Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+    ports:
+      - 3003:3003
+    environment:
+      - MONGODB_URI=mongodb+srv://fullstack:aRgYNpGlHTgYSZpc@cluster0.w6tnp3q.mongodb.net/blogApp?retryWrites=true&w=majority
+      - PORT=3003
+      - SECRET="salainen"
+    depends_on:
+      - mongo
