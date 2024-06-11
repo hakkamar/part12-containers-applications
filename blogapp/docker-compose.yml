@@ -16,11 +16,9 @@ services:
       dockerfile: ./backend/Dockerfile # This will simply tell which dockerfile to read
     volumes:
       - ./backend/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
-    ports: # Declares the ports to publish
-      - 3003:3003
     environment:
       - MONGODB_URI=mongodb+srv://fullstack:aRgYNpGlHTgYSZpc@cluster0.w6tnp3q.mongodb.net/blogApp?retryWrites=true&w=majority
-      - PORT=3003
+      - PORT=80
       - SECRET="salainen"
     depends_on:
       - mongo
@@ -32,8 +30,8 @@ services:
     volumes:
       - ./frontend/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
     environment:
-      #- VITE_BACKEND_URL=http://localhost:8080/api
-      - VITE_BACKEND_URL=http://localhost:3003/api
+      - VITE_BACKEND_URL=http://localhost:8080
+      #- VITE_BACKEND_URL=http://localhost:3003/api
     container_name: blogapp-front-prod # This will name the container
     depends_on:
       - server

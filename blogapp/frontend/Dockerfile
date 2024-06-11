@@ -8,9 +8,8 @@ RUN npm ci
 
 #RUN npm run test
 
-ENV VITE_BACKEND_URL="http://localhost:3003/"
-#ENV VITE_BACKEND_URL="/api/"
-#ENV VITE_BACKEND_URL="http://localhost:8080/api/"
+#ENV VITE_BACKEND_URL="http://localhost:3003/"
+ENV VITE_BACKEND_URL="http://localhost:8080/"
 
 RUN npm run build
 
