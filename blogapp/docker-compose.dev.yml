@@ -1,12 +1,16 @@
+#
+# fixauksia salaisuusksien peittämiseksi
+#
+
 services:
   mongo:
     image: mongo
     ports:
       - 3456:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: fullstack
-      MONGO_INITDB_ROOT_PASSWORD: aRgYNpGlHTgYSZpc
-      MONGO_INITDB_DATABASE: blogApp
+      #MONGO_INITDB_ROOT_USERNAME: fullstackXXXX
+      #MONGO_INITDB_ROOT_PASSWORD: aRgYNpGlHTgYSZpcXXXX
+      #MONGO_INITDB_DATABASE: blogAppXXXX
     volumes:
       #- ./todo-backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - ./backend/mongo_data:/data/db
@@ -44,8 +48,8 @@ services:
     ports:
       - 3003:3003
     environment:
-      - MONGODB_URI=mongodb+srv://fullstack:aRgYNpGlHTgYSZpc@cluster0.w6tnp3q.mongodb.net/blogApp?retryWrites=true&w=majority
+      #- M-O-N-G-O-D-B_U-R-I=mongodb+srv://fullstackXXXX:aRgYNpGlHTgYSZpcXXXX@cluster0.w6tnp3q.mongodb.net/blogAppXXXX?retryWrites=true&w=majority
       - PORT=3003
-      - SECRET="salainen"
+      #- S-E-C-R-E-T="salaiXXXXnen"
     depends_on:
       - mongo
