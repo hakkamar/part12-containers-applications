@@ -1,0 +1,49 @@
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 3456:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: fullstack
+      MONGO_INITDB_ROOT_PASSWORD: aRgYNpGlHTgYSZpc
+      MONGO_INITDB_DATABASE: blogApp
+    volumes:
+      - ./backend/mongo_data:/data/db
+  server:
+    image: blogapp-backend-prod
+    build:
+      context: ./backend # The context will pick this directory as the "build context"
+      dockerfile: ./backend/Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./backend/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+    ports: # Declares the ports to publish
+      - 3003:3003
+    environment:
+      - MONGODB_URI=mongodb+srv://fullstack:aRgYNpGlHTgYSZpc@cluster0.w6tnp3q.mongodb.net/blogApp?retryWrites=true&w=majority
+      - PORT=3003
+      - SECRET="salainen"
+    depends_on:
+      - mongo
+  app:
+    image: blogapp-front-prod
+    build:
+      context: ./frontend # The context will pick this directory as the "build context"
+      dockerfile: ./frontend/Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./frontend/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+    environment:
+      #- VITE_BACKEND_URL=http://localhost:8080/api
+      - VITE_BACKEND_URL=http://localhost:3003/api
+    container_name: blogapp-front-prod # This will name the container
+    depends_on:
+      - server
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on:
+      - app # wait for the frontend container to be started
+      - server
